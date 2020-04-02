@@ -1,15 +1,19 @@
-from flask import Flask
+from flask import Flask, request, jsonify, render_template
 from test import Test
 
 app = Flask(__name__)
 
+
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+
 @app.route("/predict", methods=['POST'])
 def predict():
     test = Test()
-    return test.predict()
-
-
-
+    predictedvalue = test.predict()
+    return jsonify(predictedvalue)
 
 
 
